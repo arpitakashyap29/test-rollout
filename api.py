@@ -1,15 +1,15 @@
-from app import login, checkout, get_dashboard
+from orders import place_order, cancel_order
+from auth import login, verify_token
 
 def api_login(request):
     return login(request["username"], request["password"])
 
-def api_checkout(request):
-    return checkout(
-        request["cart_id"],
-        request["card_number"],
-        request["cvv"],
-        request["amount"]
+def api_place_order(request):
+    return place_order(
+        request["user_id"],
+        request["product_id"], 
+        request["token"]
     )
 
-def api_dashboard(request):
-    return get_dashboard(request["user_id"])
+def api_cancel_order(request):
+    return cancel_order(request["order_id"])
